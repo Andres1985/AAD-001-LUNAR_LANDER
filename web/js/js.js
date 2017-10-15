@@ -16,25 +16,9 @@ var timerFuel = null;
 $(document).ready(function () {
 
     cargarConfiguracion();
-    
-    $("#guardar").click(function () { //onclick event
-        var url = "GuardarConf";
-        var emess = "Error desconocido";
-        $.ajax({
-            method: "POST",
-            url: url,
-            data: {dificultad: dificultad, modeloNave: modeloNave, modeloLuna: modeloLuna},
-            success: function (u) {
-                alert(u["mess"]);
-            },
-            error: function (e) {
-                if (e["responseJSON"] === undefined)
-                    alert(emess);
-                else
-                    alert(e["responseJSON"]["error"]);
-            }
-        });
 
+    $("#guardar").click(function () { //al hacer click en guardar -> ejecutar metodo ->
+        guardarConfiguracion();
     });
 
 });
@@ -437,11 +421,29 @@ function cargarConfiguracion() {
         dataType: 'json',
         success: function (jsn) {
             crearNave(jsn.modeloNave, jsn.dificultad, jsn.modeloLuna);
-            dificultad=jsn.dificultad;
-            modeloNave=jsn.modeloNave;
-            modeloLuna=jsn.modeloLuna;
+            dificultad = jsn.dificultad;
+            modeloNave = jsn.modeloNave;
+            modeloLuna = jsn.modeloLuna;
             restart();
             reanudar();
+        },
+        error: function (e) {
+            if (e["responseJSON"] === undefined)
+                alert(emess);
+            else
+                alert(e["responseJSON"]["error"]);
+        }
+    });
+}
+function guardarConfiguracion() {
+    var url = "GuardarConf";
+    var emess = "Error desconocido";
+    $.ajax({
+        method: "POST",
+        url: url,
+        data: {dificultad: dificultad, modeloNave: modeloNave, modeloLuna: modeloLuna},
+        success: function (u) {
+            alert(u["mess"]);
         },
         error: function (e) {
             if (e["responseJSON"] === undefined)
