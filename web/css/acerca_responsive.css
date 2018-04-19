@@ -16,3 +16,7 @@ button {
 #volver {
 	text-align: center;
 }
+
+#intro_hr{
+	visibility: visible;
+}
