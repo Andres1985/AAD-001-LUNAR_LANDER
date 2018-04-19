@@ -258,3 +258,7 @@
 	left: 10%;
 	top: 10%;
 }
+
+#intro_hr{
+	visible: hidden;
+}
