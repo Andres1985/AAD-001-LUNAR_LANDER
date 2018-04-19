@@ -17,6 +17,6 @@ button {
 	text-align: center;
 }
 
-#intro_hr{
+.intro_hr{
 	visibility: visible;
 }
